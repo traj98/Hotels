@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% load static %}
+  <link rel='stylesheet'type='text/css'href="{% static 'Aarus/css/style1.css'%}">
+  <link rel='stylesheet'type='text/css'href="{% static 'Aarus/css/style.css'%}">
+  <link rel='stylesheet'type='text/css'href="{% static 'Aarus/css/style2.css'%}">
+  <link rel='stylesheet'type='text/css'href="{% static 'Aarus/css/style3.css'%}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel='stylesheet' type='text/css' href="{% static 'Aarus/css/bootstrap.min.css'%}">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'Aarus/css/open-iconic-bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'Aarus/css/animate.css'%}">
+    
+    <link rel="stylesheet" href="{% static 'Aarus/css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{% static 'Aarus/css/owl.theme.default.min.css '%}">
+    <link rel="stylesheet" href="{% static 'Aarus/css/magnific-popup.css '%}">
+
+    <link rel="stylesheet" href="{% static 'Aarus/css/aos.css '%}">
+
+
+    <link rel="stylesheet" href="{% static 'Aarus/css/ionicons.min.css '%}">
+
+    <link rel="stylesheet" href="{% static 'Aarus/css/bootstrap-datepicker.css '%}">
+    <link rel="stylesheet" href="{% static 'Aarus/css/jquery.timepicker.css '%}">
+
+    
+    <link rel="stylesheet" href="{% static 'Aarus/css/flaticon.css '%}">
+    <link rel="stylesheet" href="{% static 'Aarus/css/icomoon.css '%}">
+    <link rel="stylesheet" href="{% static 'Aarus/css/style.css '%}">
+  
+  <script type="text/javascript" src="{% static 'Aarus/js/jquery-1.11.2.min.js' %}"></script>
+
+{% block javascript %}
+{% endblock %}
+    <title>{% block title %}Aarus Foundation{% endblock %}</title>
+</head>
+<body style="font-family:Verdana;color:#aaaaaa;">
+  
+ <a href="{% url 'home' %}"style="margin-left: 40%;color:white;"><div class="navbar" ><h1 class="page-header">Aarus Foundation</h1></a>
+    <div style="clear:both;text-align: right;">
+          {% if user.is_authenticated %}
+          <a href="#">Logout</a><br>
+             <h6 style ="color:white;"> Hi {{ user.username }}</h6>
+          {% else %}
+                <a href="{% url 'signup' %} ">Register</a>
+                <a href="#">Login</a>
+                <p>You are not logged in</p>
+
+          {% endif %}
+               </div>
+  <div class="navbar">
+  <a class="active" href="{% url 'home' %}"> <i class="fa fa-fw fa-home"></i> Home  </a>
+  <a href="#">Blog</a>
+  <a href="#">Gallery</a>
+  <a href="#">Donate for Vitiligo</a>
+  <a href="#">About us</a>
+  <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact us </a>
+  <div class="search-container">
+    <form action= "{% url 'home' %}">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button><br>
+    </form>
+  </div>
+  </div>
+</div>
+<div>
+  <img src="">
+  {% block content %}
+  {% endblock %}
+</div>
+
+
+	<div class="footer" style="background-color: #555;color:white;"><center><p>© copyright</p></center>
+		<footer class="main-footer">
+      <div class="footer-content">
+        <div class="container">
+          <div class="row">
+
+            <div class=" col-xl-2 col-xl-2 col-md-2 col-6  ">
+              <div class="footer-col">
+                <h4 class="footer-title">About us</h4>
+                <ul class="list-unstyled footer-nav">
+                  <li><a href="#">About Foundation</a></li>
+                  <li><a href="#">Our Partners</a></li>
+                  <li><a href="event-home.html">Events</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class=" col-xl-2 col-xl-2 col-md-2 col-6  ">
+              <div class="footer-col">
+                <h4 class="footer-title">Help & Contact</h4>
+                <ul class="list-unstyled footer-nav">
+                  <li><a href="#">
+                    Stay Safe Online
+                  </a></li>
+                  <li><a href="#"> Contact us</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class=" col-xl-2 col-xl-2 col-md-2 col-6  ">
+              <div class="footer-col">
+                <h4 class="footer-title">More From Us</h4>
+                <ul class="list-unstyled footer-nav">
+                  <li><a href="faq.html">FAQ</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#"> User Reviews </a></li>
+                </ul>
+              </div>
+            </div>
+            <div class=" col-xl-2 col-xl-2 col-md-2 col-6  ">
+              <div class="footer-col">
+                <h4 class="footer-title">Account</h4>
+                <ul class="list-unstyled footer-nav">
+                  <li><a href="">Login
+                  </a></li>
+                  <li>
+                  {% if user.is_authenticated %}
+                  <a href=""> Profile
+                  </a>
+                  {% else %}
+                  <a href="{% url 'signup' %} ">Register</a>
+                  {% endif %}
+                </li>
+
+  
+                </ul>
+              </div>
+            </div>
+            
+
+                <div class=" col-xl-2 col-xl-2 col-md-2 col-7">
+                  <div class="hero-subscribe">
+                    <h4 class="footer-title no-margin">Follow us on</h4>
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-youtube"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                  </div>
+
+                </div>
+              </div>
+            </div></div></footer></div>
+
+</body>
+</html>

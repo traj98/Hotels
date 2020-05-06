@@ -1,0 +1,49 @@
+{% extends 'accounts/base.html' %}
+{% load crispy_forms_tags %}
+{% block pageheading %} Signup {% endblock %}
+{% block title %}Sign up {% endblock %}
+{% block content %}
+{% block javascript %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        console.log("here");
+        $('#id_username').change(function(){
+        console.log("here")
+
+        var username =$(this).val();
+        $.ajax({
+            url: '/accounts/ajax/validate_username',
+            data: {
+                'username':username
+            },
+            dataType:'json',
+            success:function (data){
+                if(data.is_taken){
+                    alert('A user with this username already exists');
+                }
+            }
+        });
+    });
+}); 
+</script>
+{% endblock %}
+{% block main %}
+<div class='container'>
+        <div class='row justify-content-center'>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Sign up</h4>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            <button type='submit' class="btn btn-primary btn-block">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% endblock %}
