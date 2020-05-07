@@ -28,22 +28,17 @@
 </script>
 {% endblock %}
 {% block main %}
-<div class='container'>
-        <div class='row justify-content-center'>
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Sign up</h4>
-                        <form method="POST">
-                            {% csrf_token %}
-                            {{ form | crispy }}
-                            <button type='submit' class="btn btn-primary btn-block">Register</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<form  data-action="{% url 'signup' %}" action="{% url 'signup' %}" method="post" id="user-register-form" accept-charset="UTF-8">{% csrf_token %}
+<label for="edit-field-firstname-0-value" class="js-form-required form-required">Email</label>
+<input class="js-text-full text-full form-text required" data-drupal-selector="edit-field-firstname-0-value" type="text" id="edit-field-firstname-0-value" name="username" value="" size="60" maxlength="255" placeholder="" required="required" aria-required="true" />
+
+<label for="edit-field-firstname-0-value" class="js-form-required form-required">First Name</label>
+<input class="js-text-full text-full form-text required" data-drupal-selector="edit-field-firstname-0-value" type="text" id="edit-field-firstname-0-value" name="firstname" value="" size="60" maxlength="255" placeholder="" required="required" aria-required="true" />
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions"><div class="button button--arrow button--submit">
+  <input data-drupal-selector="edit-submit" type="submit" id="edit-submit" name="op" value="Nieuw account aanmaken" class="js-form-submit form-submit" />
+</div>
+
+</form>
 {% endblock %}
 
 {% endblock %}

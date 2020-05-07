@@ -1,5 +1,5 @@
 from django.contrib.auth import views
-
+from accounts import views
 from django.urls import path
 from .views import *
 from django.conf.urls import url
@@ -11,11 +11,12 @@ from django.conf.urls import url
 		
 
 urlpatterns =[
-			path('signup/',SignUp,name='signup'),
+			path('signup/',register,name='signup'),
 			# path('profile',profile,name='profile'),
 			# url(r'^ajax/validate_username/$',validate_username,name='validate_username'),
-   #          path('login/',views.LoginView.as_view(),name='login'),
-			# path('logout/',views.LogoutView.as_view(),name='logout'),
+           	path('login/',login_user,name='login'),
+			path('logout/',logout_user,name='logout'),
+			url(r'^user/edit/(?P<id>[0-9A-Za-z_\-]+)/$',views.user_edit),
 			# path('password-change/',views.PasswordChangeView.as_view(),name='password_change'),
 			# path('password-change/done/',views.PasswordChangeDoneView.as_view(),name='password_change_done'),
 			# path('password-reset/',views.PasswordResetView.as_view(),name='password_reset'),
@@ -28,6 +29,7 @@ urlpatterns =[
    #  		path('change/email/', ChangeEmailView.as_view(), name='change_email'),
    #  		path('change/email/<code>/', ChangeEmailActivateView.as_view(), name='change_email_activation'),
 			# path('resend/activation-code/', ResendActivationCodeView.as_view(), name='resend_activation_code'),
+
 	
 	
 ]

@@ -11,19 +11,57 @@ from .forms import *
 
 
 
-def SignUp(request):
-	form = SignUpForm(request.POST)
-	if form.is_valid():
-		first_name = form.cleaned_data['first_name']
-		last_name = form.cleaned_data['last_name']
-		email = form.cleaned_data['email']
-		phone = form.cleaned_data['phone']
-		mobile=form.cleaned_data['mobile']
-		sex = form.cleaned_data['sex']
-		form.save()
-		print(form)
-		return redirect('home')
+def register(request):
+	if request.method == 'POST':
+		data = {}
+		username = request.POST.get('username')
+		if(request.POST.get('firstname')):
+			data['firstname']=request.POST.get('firstname')
+		if (request.POST.get('lastname')):
+			data['lastname'] = request.POST.get('lastname')
+		if (request.POST.get('phone')):
+			data['phone'] = request.POST.get('phone')
+		if (request.POST.get('mobile')):
+			data['mobile'] = request.POST.get('mobile')
+		if (request.POST.get('sex')):
+			data['sex'] = request.POST.get('sex')
+		user = User.objects.create(email=username,username=username,password='admin')
+		userdata1 = UserProfile.objects.filter(user=user).update(**data)
+		userdata = UserProfile.objects.get(user=user)
+		return render(request, 'home.html')
 	else:
-		form = SignUpForm()
-		print(form)
-	return render(request, 'registration/signup.html', {'form': form})
+		return render(request, 'registration/signup.html',{})
+
+def logout_user(request):
+	logout(request)
+	return redirect('login')
+
+
+
+def login_user(request):
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		user = authenticate(request, username=username, password=password)
+		print(user)
+		if user is not None:
+			login(request, user)
+			return redirect("/")
+		else:
+			msg = 'incorrect details'
+			return render(request, 'login.html', {'msg': msg})
+	else:
+		msg = ''
+		return render(request, 'login.html', {'msg': msg})
+
+
+def user_edit(request,id):
+	user1 = UserProfile.objects.get(pk=id)
+	if request.method == 'POST':
+		form = Incidentedit(request.POST, instance=user1)
+		if form.is_valid():
+			form.save()
+			return redirect('/')
+	else:
+		form = Incidentedit(instance=user1)
+		return render(request, 'incidentedit.html',{'form': form})

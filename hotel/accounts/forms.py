@@ -8,9 +8,12 @@ from django.contrib.auth.models import User
 
 
 class profileForm(forms.ModelForm):
+    phone = forms.CharField(max_length=10)
+    mobile =forms.CharField(max_length=10)
+    sex =forms.CharField(max_length=10)
     class Meta:
         model = User
-        fields = ['first_name','last_name','email']
+        fields = ['first_name','last_name','email','phone','mobile','sex',]
     
 
 class SignUpForm(UserCreationForm):
@@ -23,3 +26,9 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username','first_name', 'last_name','email','phone','mobile','sex', 'password1', 'password2',)
+
+
+class Incidentedit(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
