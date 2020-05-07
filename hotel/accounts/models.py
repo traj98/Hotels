@@ -30,14 +30,4 @@ def create_user_profile(sender, instance, created, **kwargs):
         UserProfile.objects.create(user=instance)
 
 
-def user_edit(request,id):
-	user1 = UserProfile.objects.get(pk=id)
-	if request.method == 'POST':
-		form = Incidentedit(request.POST, instance=user1)
-		if form.is_valid():
-			form.save()
-			return redirect('/')
-	else:
-		form = Incidentedit(instance=user1)
-		return render(request, 'incidentedit.html',{'form': form})
 
