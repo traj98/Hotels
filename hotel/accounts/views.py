@@ -26,6 +26,10 @@ def register(request):
 		if (request.POST.get('sex')):
 			data['sex'] = request.POST.get('sex')
 		user = User.objects.create(email=username,username=username,password='admin')
+		userdata = User.objects.filter(username=username)
+		##if userdata:
+		##	userid = userdata.id
+		##userextra_data = UserProfile.objects.create(fieldname=fieldvalue,fieldname1=fieldvalue1,user=userid)
 		userdata1 = UserProfile.objects.filter(user=user).update(**data)
 		userdata = UserProfile.objects.get(user=user)
 		return render(request, 'home.html')
